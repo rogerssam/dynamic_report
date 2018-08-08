@@ -1,0 +1,38 @@
+---
+title: "Dynamic report"
+output: html_document
+params:
+  n: NA
+  plot: NA
+---
+
+```{r eval = FALSE, echo = FALSE}
+# For PDF output, change the header to have "output: pdf_document".
+#
+# Note that due to an issue in rmarkdown, the default value of a parameter in
+# the header cannot be `NULL`, so I used a default of `NA` for the default value
+# of `n`.
+```
+
+
+```{r}
+# The `params` object is available in the document.
+params$n
+params$plot
+```
+
+And we can also do things to the plot that we didn't show in the Shiny app:
+
+```{r}
+library(ggplot2)
+# p <- params$plot
+# p 
+params$plot + labs(title="An informative title") + scale_y_reverse()
+```
+
+
+A plot of `params$n` random points.
+
+```{r}
+plot(rnorm(params$n), rnorm(params$n))
+```
