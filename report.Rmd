@@ -3,7 +3,6 @@ title: "Dynamic report"
 output: html_document
 params:
   n: NA
-  plot: NA
 ---
 
 ```{r eval = FALSE, echo = FALSE}
@@ -18,21 +17,26 @@ params:
 ```{r}
 # The `params` object is available in the document.
 params$n
-params$plot
 ```
-
-And we can also do things to the plot that we didn't show in the Shiny app:
-
-```{r}
-library(ggplot2)
-# p <- params$plot
-# p 
-params$plot + labs(title="An informative title") + scale_y_reverse()
-```
-
 
 A plot of `params$n` random points.
 
 ```{r}
 plot(rnorm(params$n), rnorm(params$n))
 ```
+
+
+We can also add the plot from Shiny in using (almost) the same code:
+
+```{r}
+library(ggplot2)
+p <- ggplot(faithful, aes(x=waiting)) + geom_histogram(bins = params$n) + theme_bw()
+print(p)
+```
+
+And do extra things to it of course...
+
+```{r}
+p + labs(title = "An informative Title") + scale_y_reverse()
+```
+

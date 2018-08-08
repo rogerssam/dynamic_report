@@ -27,7 +27,7 @@ shinyApp(
         file.copy("report.Rmd", tempReport, overwrite = TRUE)
         
         # Set up parameters to pass to Rmd document
-        params <- list(n = input$slider, plot = p)
+        params <- list(n = input$slider)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
